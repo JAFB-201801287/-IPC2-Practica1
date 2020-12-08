@@ -20,8 +20,8 @@ def caratula():
 
 def menu():
     opcionMenu = 0
-    caratula()
     while True:
+        caratula()
         print(" Menu ".title().center(150, "="))
         print("\t1) - LECTURA DE ARCHIVO CSV:")
         print("\t2) - CALCULO DE DATOS:")
@@ -35,7 +35,7 @@ def menu():
         if opcionMenu == "1":
             ordenarInformacion()
         elif opcionMenu == "2":
-            continue
+            calcularDatos()
         elif opcionMenu == "3":
             continue
         elif opcionMenu == "4":
@@ -43,6 +43,7 @@ def menu():
         else:
             print("")
             input("NO SE PULSO NINGUNA OPCION CORRECTA...\nPULSA CUALQUIER TECLA PARA CONTINUAR")
+        clean()
 
 # METODO PARA LEER EL ARCHIVO CSV
 def leerArchivo():
@@ -63,12 +64,12 @@ def ordenarInformacion():
         if(datos != ''):
             dato = datos.split(',')
             candidato = Candidato.Candidato()
-            candidato.setId(dato[0])
-            candidato.setNombre(dato[1])
-            candidato.setApellido(dato[2])
-            candidato.setEdad(dato[3])
-            candidato.setPuesto(dato[4])
-            candidato.setSalario(dato[5])
+            candidato.setId(dato[0].strip())
+            candidato.setNombre(dato[1].strip())
+            candidato.setApellido(dato[2].strip())
+            candidato.setEdad(dato[3].strip())
+            candidato.setPuesto(dato[4].strip())
+            candidato.setSalario(dato[5].strip())
             
             print('')
             print('CANDIDATO ------------------------------------------------------')
@@ -79,7 +80,6 @@ def ordenarInformacion():
             print(f'PUESTO AL QUE APLICA: {candidato.getPuesto()}')
             print(f'PRETENCION SALARIAL: {candidato.getSalario()}')
 
-            print(controlador_candidato.find(candidato.getId()))
             if(controlador_candidato.find(candidato.getId()) == False):
                 controlador_candidato.add(candidato)
                 print('ESTADO: ACEPTADO')
@@ -87,6 +87,31 @@ def ordenarInformacion():
                 print('ESTADO: NO ACEPTADO')
 
             
+
+    print("")
+    input("PULSA CUALQUIER TECLA PARA CONTINUAR")
+
+def calcularDatos():
+    puestos = controlador_candidato.getPuestos()
+    candidatos = controlador_candidato.get()
+
+    for puesto in puestos:
+        cantidad_candidatos = 0
+        edad_promedio = 0
+        salario_promedio = 0
+
+        for candidato in candidatos:
+            if(candidato.getPuesto() == puesto):
+                cantidad_candidatos += 1
+                edad_promedio += int(candidato.getEdad())
+                salario_promedio += float(candidato.getSalario())
+        if(cantidad_candidatos > 0):
+            print('')
+            print(puesto.upper().ljust(150, '-'))
+            print(f'CANTIDAD DE CANDIDATOS: {str(cantidad_candidatos)}')
+            print(f'EDAD PROMEDIO: {str(float("{:.2f}".format(edad_promedio/cantidad_candidatos)))}')
+            print(f'PRETENSION SALARIAL PROMEDIO: {str(float("{:.2f}".format(salario_promedio/cantidad_candidatos)))}')
+
 
     print("")
     input("PULSA CUALQUIER TECLA PARA CONTINUAR")
