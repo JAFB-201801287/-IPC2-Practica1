@@ -3,7 +3,7 @@
 class Candidato():
 
     def __init__(self):
-        self.id = 0
+        self.id = ""
         self.nombre = ""
         self.apellido = ""
         self.edad = 0
