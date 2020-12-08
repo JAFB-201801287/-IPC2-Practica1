@@ -1,16 +1,16 @@
 {
     "Gerente": [
         {
-            "Candidatos": 3,
-            "Edad Promedio": 24.33,
-            "Pretensi\u00f3n Salarial": 1166.67
+            "Candidatos": 2,
+            "Edad Promedio": 23.0,
+            "Pretensi\u00f3n Salarial": 750.0
         }
     ],
     "Supervisor": [
         {
-            "Candidatos": 1,
-            "Edad Promedio": 29.0,
-            "Pretensi\u00f3n Salarial": 3000.0
+            "Candidatos": 2,
+            "Edad Promedio": 28.0,
+            "Pretensi\u00f3n Salarial": 2500.0
         }
     ]
 }

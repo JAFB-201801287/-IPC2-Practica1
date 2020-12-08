@@ -2,6 +2,7 @@
 
 import os
 import json
+import webbrowser # SE UTILIZA PARA ABRIR EL ARCHIVO JSON UNA VEZ CREADO
 
 import controller.candidatoController as CandidatoController
 import model.candidato as Candidato
@@ -57,6 +58,7 @@ def leerArchivo():
     return temp
 
 def ordenarInformacion():
+    controlador_candidato.clean()
     informacion = leerArchivo()
     temp = informacion.split('\n')
     temp.pop(0)
@@ -150,6 +152,8 @@ def escribirArchivo():
     with open('data.json', 'w') as file:
         json.dump(data, file, indent=4)
 
+    chrome_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
+    webbrowser.get(chrome_path).open('data.json')
     print("")
     input("PULSA CUALQUIER TECLA PARA CONTINUAR")
 

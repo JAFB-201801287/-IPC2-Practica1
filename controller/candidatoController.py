@@ -46,3 +46,7 @@ class CandidatoController():
             if(p == puesto):
                 return True
         return False
+
+    def clean(self):
+        self.candidatos = []
+        self.puestos = []
