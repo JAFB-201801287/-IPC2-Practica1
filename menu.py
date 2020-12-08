@@ -25,10 +25,10 @@ def menu():
         print("")
 
         # solicituamos una opción al usuario
-        opcionMenu = input("inserta un numero valor >> ")
+        opcionMenu = input("ESCRIBIR NUMERO DE LA OPCION >> ")
         print("".center(150, "_"))
         if opcionMenu == "1":
-            continue
+            leerArchivo()
         elif opcionMenu == "2":
             continue
         elif opcionMenu == "3":
@@ -37,5 +37,16 @@ def menu():
             break
         else:
             print("")
-            input(
-                "No has pulsado ninguna opción correcta...\npulsa una tecla para continuar")
+            input("No has pulsado ninguna opción correcta...\npulsa una tecla para continuar")
+
+def leerArchivo():
+    temp = ""
+    direccion = input("ESCRIBIR DIRECCION DEL ARCHIVO CSV >> ")
+    with open(direccion, "r", encoding="utf-8") as f: 
+        for line in f.readlines():
+            temp += line
+
+    print(temp)
+    input("")
+
+    
