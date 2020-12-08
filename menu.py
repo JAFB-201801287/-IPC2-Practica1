@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import json
 
 import controller.candidatoController as CandidatoController
 import model.candidato as Candidato
@@ -37,7 +38,7 @@ def menu():
         elif opcionMenu == "2":
             calcularDatos()
         elif opcionMenu == "3":
-            continue
+            escribirArchivo()
         elif opcionMenu == "4":
             break
         else:
@@ -116,6 +117,41 @@ def calcularDatos():
     print("")
     input("PULSA CUALQUIER TECLA PARA CONTINUAR")
 
+# METODO PARA LEER ARCHIVO JSON
+def escribirArchivo():
+    data = {}
+    puestos = controlador_candidato.getPuestos()
+    candidatos = controlador_candidato.get()
+    
+    for puesto in puestos:
+        cantidad_candidatos = 0
+        edad_promedio = 0
+        salario_promedio = 0
+
+        for candidato in candidatos:
+            if(candidato.getPuesto() == puesto):
+                cantidad_candidatos += 1
+                edad_promedio += int(candidato.getEdad())
+                salario_promedio += float(candidato.getSalario())
+
+        if(cantidad_candidatos > 0):
+            data[puesto] = []
+            data[puesto].append({
+                'Candidatos': cantidad_candidatos,
+                'Edad Promedio': float("{:.2f}".format(edad_promedio/cantidad_candidatos)),
+                'Pretensión Salarial': float("{:.2f}".format(salario_promedio/cantidad_candidatos))
+            })
+            print('')
+            print(puesto.upper().ljust(150, '-'))
+            print(f'CANTIDAD DE CANDIDATOS: {str(cantidad_candidatos)}')
+            print(f'EDAD PROMEDIO: {str(float("{:.2f}".format(edad_promedio/cantidad_candidatos)))}')
+            print(f'PRETENSION SALARIAL PROMEDIO: {str(float("{:.2f}".format(salario_promedio/cantidad_candidatos)))}')
+
+    with open('data.json', 'w') as file:
+        json.dump(data, file, indent=4)
+
+    print("")
+    input("PULSA CUALQUIER TECLA PARA CONTINUAR")
 
 
 
