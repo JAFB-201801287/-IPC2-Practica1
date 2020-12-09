@@ -141,7 +141,7 @@ def escribirArchivo():
             data[puesto].append({
                 'Candidatos': cantidad_candidatos,
                 'Edad Promedio': float("{:.2f}".format(edad_promedio/cantidad_candidatos)),
-                'Pretensión Salarial': float("{:.2f}".format(salario_promedio/cantidad_candidatos))
+                'Pretension Salarial': float("{:.2f}".format(salario_promedio/cantidad_candidatos))
             })
             print('')
             print(puesto.upper().ljust(150, '-'))
